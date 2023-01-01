@@ -15,3 +15,5 @@ updates:
     ignore:
       - dependency-name: "dotnet/sdk"
         update-types: ["version-update:semver-major"]
+      - dependency-name: "dotnet/aspnet"
+        update-types: ["version-update:semver-major"]
