@@ -351,4 +351,6 @@ MigrationBackup/
 
 # Custom
 /.idea/
-/.env
+/.env<
+appsettings.json
+appsettings.Development.json
