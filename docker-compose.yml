@@ -10,4 +10,4 @@ services:
       - api.hue.application-key=${API_HUE_APPLICATION_KEY}
       - hue.bridge.ip=${HUE_BRIDGE_IP}
     ports:
-      - "5214:5214"
+      - "80:80"
