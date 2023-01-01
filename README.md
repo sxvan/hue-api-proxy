@@ -29,12 +29,12 @@ Actions
 Set button
 
 ```shell
-curl --location -g --request POST 'http://<ip>/api/v1/action/<button>/<action>' \
---data-raw get://192.168.1.104/api/v1/toggle/<id>
+curl --location -g --request POST 'http://<button_ip>/api/v1/action/<button>/<action>' \
+--data-raw get://<server_ip>/api/v1/toggle/<id>
 ```
 
 Get Button
 
 ```shell
-curl --location -g --request GET '192.168.1.241/api/v1/actions/<button>'
+curl --location -g --request GET '<button_ip>/api/v1/actions/<button>'
 ```
