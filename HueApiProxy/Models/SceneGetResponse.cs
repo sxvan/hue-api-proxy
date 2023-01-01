@@ -2,7 +2,7 @@
 
 namespace HueApiProxy.Models
 {
-    public class Test
+    public class SceneGetResponse
     {
         public object[] Errors { get; set; }
 
