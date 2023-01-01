@@ -1,10 +1,10 @@
 version: '3.8'
 services:
   hue-api-proxy:
-#    image: ghcr.io/sxvan/hue-api-proxy:latest
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: ghcr.io/sxvan/hue-api-proxy:latest
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
     container_name: hue-api-proxy
     environment:
       - api.hue.application-key=${API_HUE_APPLICATION_KEY}
