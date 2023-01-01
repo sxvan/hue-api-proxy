@@ -29,7 +29,7 @@ Actions
 Set button
 
 ```shell
-curl --location -g --request POST 'http://<ip>/api/v1/action/<button>/<action>' / 
+curl --location -g --request POST 'http://<ip>/api/v1/action/<button>/<action>' \
 --data-raw get://192.168.1.104/api/v1/toggle/<id>
 ```
 
