@@ -40,5 +40,11 @@ namespace MyStromButton.Controllers
 
             return Ok();
         }
+
+        [HttpGet("dashboard")]
+        public async Task<IActionResult> Dashboard()
+        {
+            return Ok("Test");
+        }
     }
 }
