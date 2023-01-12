@@ -2,6 +2,6 @@
 {
     public class ColorTemperature
     {
-        public int Mirek { get; set; }
+        public int? Mirek { get; set; }
     }
 }
