@@ -1,5 +1,6 @@
 ﻿using HueApiProxy.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using MyStromButton.Models;
 
 namespace MyStromButton.Controllers
@@ -43,17 +44,48 @@ namespace MyStromButton.Controllers
         [HttpGet("scene/{id}")]
         public async Task<IActionResult> Scene(string id)
         {
-            var sceneResponse = await this.http.GetFromJsonAsync<SceneGetResponse>($"https://{this.hueBridgeIp}/clip/v2/resource/scene/{id}");
-            var res = sceneResponse.Data[0];
-
-            for (int i = 0; i < res.GetProperty("actions").GetArrayLength(); i++)
+            var body = new
             {
-                var action = res.GetProperty("actions")[i];
-                var executeAction = action.GetProperty("action");
-                var rid = action.GetProperty("target").GetProperty("rid").GetString();
+                recall = new
+                {
+                    action = "active"
+                }
+            };
 
-                await this.http.PutAsJsonAsync($"https://{this.hueBridgeIp}/clip/v2/resource/light/{rid}", executeAction as object);
-            }
+            await this.http.PutAsJsonAsync<object>($"https://{this.hueBridgeIp}/clip/v2/resource/scene/{id}", body);
+
+            return Ok();
+        }
+
+        [HttpGet("dim/{id}/{direction}/{delta}")]
+        public async Task<IActionResult> Dim(string id, string direction, int delta)
+        {
+            var body = new
+            {
+                dimming_delta = new
+                {
+                    action = direction,
+                    brightness_delta = delta
+                }
+            };
+
+            await this.http.PutAsJsonAsync<object>($"https://{this.hueBridgeIp}/clip/v2/resource/light/{id}", body);
+
+            return Ok();
+        }
+
+        [HttpGet("effect/{id}/{effect}")]
+        public async Task<IActionResult> Effect(string id, string effect)
+        {
+            var body = new
+            {
+                effects = new
+                {
+                    effect = effect
+                }
+            };
+
+            await this.http.PutAsJsonAsync<object>($"https://{this.hueBridgeIp}/clip/v2/resource/light/{id}", body);
 
             return Ok();
         }

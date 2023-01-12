@@ -2,13 +2,21 @@
 
 ## Usage
 
-### Toggle lights
+### Toggle light
 
 `<ip>/api/v1/toggle/<id>`
 
-### Toggle
+### Recall scene
 
 `<ip>/api/v1/scene/<id>`
+
+### Dim light
+
+`<ip>/api/v1/dim/<id>/<up|down>/<delta>`
+
+### Recall effect
+
+`<ip>/api/v1/effect/<id>/<fire|candle>`
 
 ## Overview
 
