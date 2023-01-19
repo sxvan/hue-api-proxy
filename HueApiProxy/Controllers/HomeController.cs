@@ -28,7 +28,7 @@ namespace MyStromButton.Controllers
         {
             var lightGetResponse = await this.http.GetFromJsonAsync<LightGetResponse>($"https://{this.hueBridgeIp}/clip/v2/resource/light/{id}");
 
-            var body = new 
+            var body = new
             {
                 on = new
                 {
@@ -61,13 +61,40 @@ namespace MyStromButton.Controllers
         public async Task<IActionResult> Dim(string id, string direction, int delta)
         {
             var lightGetResponse = await this.http.GetFromJsonAsync<LightGetResponse>($"https://{this.hueBridgeIp}/clip/v2/resource/light/{id}");
-            if (string.Equals(direction, "up", StringComparison.InvariantCultureIgnoreCase) && !lightGetResponse.Data.First().On.IsOn)
+            object body = null;
+            if (!lightGetResponse.Data.First().On.IsOn)
             {
-                await this.http.PutAsJsonAsync($"https://{this.hueBridgeIp}/clip/v2/resource/light/{id}", new { on = new { on = true } });
+                if (string.Equals(direction, "up", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    body = new
+                    {
+                        on = new
+                        {
+                            on = true
+                        }
+                    };
+                }
+
+                if (string.Equals(direction, "down", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    body = new
+                    {
+                        on = new
+                        {
+                            on = true
+                        },
+                        dimming = new
+                        {
+                            brightness = delta
+                        }
+                    };
+                }
+
+                await this.http.PutAsJsonAsync($"https://{this.hueBridgeIp}/clip/v2/resource/light/{id}", body);
                 return Ok();
             }
 
-            var body = new
+            body = new
             {
                 dimming_delta = new
                 {
