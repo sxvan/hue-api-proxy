@@ -19,5 +19,5 @@ USER app
 COPY --from=build /app/out .
 ENV DOTNET_EnableDiagnostics=0
 EXPOSE 80
-HEALTHCHECK CMD curl --fail http://localhost:80/health || exit
+HEALTHCHECK --interval=5m --timeout=3s CMD curl --fail http://localhost:80/health || exit
 ENTRYPOINT ["dotnet", "HueApiProxy.dll"]
