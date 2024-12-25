@@ -18,6 +18,8 @@ USER app
 
 COPY --from=build /app/out .
 ENV DOTNET_EnableDiagnostics=0
-EXPOSE 80
-HEALTHCHECK --interval=5m --timeout=3s CMD curl --fail http://localhost:80/health || exit
+ENV ASPNETCORE_HTTP_PORTS=8080
+ENV ASPNETCORE_URLS=http://*:8080
+EXPOSE 8080
+HEALTHCHECK --interval=5m --timeout=3s CMD curl --fail http://localhost:8080/health || exit
 ENTRYPOINT ["dotnet", "HueApiProxy.dll"]
